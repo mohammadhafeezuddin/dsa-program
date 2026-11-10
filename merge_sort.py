@@ -1,0 +1,42 @@
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left_half = arr[:mid]
+    right_half = arr[mid:]
+
+    left_half = merge_sort(left_half)
+    right_half = merge_sort(right_half)
+
+    result = []
+    i = 0
+    j = 0
+    while i < len(left_half) and j < len(right_half):
+        if left_half[i] < right_half[j]:
+            result.append(left_half[i])
+            i = i + 1
+        else:
+            result.append(right_half[j])
+            j = j + 1
+
+    while i < len(left_half):
+        result.append(left_half[i])
+        i = i + 1
+
+    while j < len(right_half):
+        result.append(right_half[j])
+        j = j + 1
+
+    return result
+
+
+n = int(input("Enter no. of elements: "))
+arr = []
+for i in range(n):
+    element = int(input("Enter element: "))
+    arr.append(element)
+
+print("Original array:", arr)
+sorted_arr = merge_sort(arr)
+print("Sorted array:", sorted_arr)
